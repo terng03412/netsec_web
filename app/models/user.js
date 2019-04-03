@@ -45,9 +45,8 @@ userSchema.methods.generateHash = function (password) {
 // checking if password is valid
 userSchema.methods.validPassword = function (password) {
     var salt = this.local.password.substring(0, 29);
-    var hashpw = this.local.password.substring(30, 93);
-
-    return Crypto.SHA256(salt + password).toString().localeCompare(hashpw);;
+    var hashpw = this.local.password.substring(30, 94);
+    return !(Crypto.SHA256(salt + password).toString().localeCompare(hashpw));
 };
 
 // create the model for users and expose it to our app
